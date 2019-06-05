@@ -3,4 +3,4 @@ deps/
 .project
 .cproject
 *.user
-opencv-2.4.9/build/
+.vscode/
