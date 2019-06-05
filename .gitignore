@@ -1,5 +1,6 @@
 build/
-deps/
+deps/opencv/build/
+deps/DLib
 .project
 .cproject
 *.user
