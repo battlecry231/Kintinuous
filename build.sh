@@ -18,6 +18,38 @@ elif [[ $version == *"15.04"* ]] ; then
     rm cuda-repo-ubuntu1504_7.5-18_amd64.deb
     sudo apt-get update
     sudo apt-get install -y libpcl-dev yasm libvtk5-qt4-dev
+elif [[ $version == *"18.10"* ]] ; then
+    nvcc --version &> /dev/null
+    if [ $? -eq 0 ]; then
+        echo "Cuda already installed..."
+        sudo apt update
+    else
+        echo "Installing Cuda..."
+        wget http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1810/x86_64/cuda-repo-ubuntu1810_10.1.168-1_amd64.deb
+        sudo dpkg -i cuda-repo-ubuntu1810_10.1.168-1_amd64.deb
+        rm cuda-repo-ubuntu1810_10.1.168-1_amd64.deb
+        sudo apt update
+        sudo apt install cuda
+    fi
+    sudo apt install cmake-qt-gui git build-essential libusb-1.0-0-dev libudev-dev openjdk-11-jdk freeglut3-dev python-vtk6 libvtk6-java libglew-dev libsuitesparse-dev
+    sudo apt install python-pip
+    pip install numpy
+    #OpenCV installation
+    wget http://sourceforge.net/projects/opencvlibrary/files/opencv-unix/2.4.9/opencv-2.4.9.zip
+    unzip opencv-2.4.9.zip
+    rm opencv-2.4.9.zip
+    cd opencv-2.4.9
+    #cp ../../patch.txt cmake/patch.txt
+    #cd cmake
+    #patch OpenCVDetectCXXCompiler.cmake patch.txt
+    #cd ..
+    mkdir build
+    cd build
+    cmake -D BUILD_NEW_PYTHON_SUPPORT=OFF -D WITH_OPENCL=OFF -D WITH_OPENMP=ON -D INSTALL_C_EXAMPLES=OFF -D BUILD_DOCS=OFF -D BUILD_EXAMPLES=OFF -D WITH_QT=OFF -D WITH_OPENGL=OFF -D WITH_VTK=OFF -D BUILD_PERF_TESTS=OFF -D BUILD_TESTS=OFF -D WITH_CUDA=OFF -D BUILD_opencv_gpu=OFF -Wno-dev ..
+
+
+
+    exit
 else
     echo "Don't use this on anything except 14.04 or 15.04"
     exit
