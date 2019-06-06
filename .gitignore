@@ -1,6 +1,10 @@
 build/
 deps/opencv/build/
-deps/DLib
+deps/DLib/build/
+deps/DBoW2/build/
+deps/DLoopDetector/build/
+deps/isam_v1_7/build/
+loop.kl*
 .project
 .cproject
 *.user
