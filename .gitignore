@@ -9,3 +9,4 @@ loop.kl*
 .cproject
 *.user
 .vscode/
+deps/Pagolin/
