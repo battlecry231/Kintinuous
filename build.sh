@@ -34,19 +34,53 @@ elif [[ $version == *"18.10"* ]] ; then
     sudo apt install cmake-qt-gui git build-essential libusb-1.0-0-dev libudev-dev openjdk-11-jdk freeglut3-dev python-vtk6 libvtk6-java libglew-dev libsuitesparse-dev
     sudo apt install python-pip
     pip install numpy
-    #OpenCV installation
-    wget http://sourceforge.net/projects/opencvlibrary/files/opencv-unix/2.4.9/opencv-2.4.9.zip
-    unzip opencv-2.4.9.zip
-    rm opencv-2.4.9.zip
-    cd opencv-2.4.9
-    #cp ../../patch.txt cmake/patch.txt
-    #cd cmake
-    #patch OpenCVDetectCXXCompiler.cmake patch.txt
-    #cd ..
+    cd opencv
     mkdir build
     cd build
     cmake -D BUILD_NEW_PYTHON_SUPPORT=OFF -D WITH_OPENCL=OFF -D WITH_OPENMP=ON -D INSTALL_C_EXAMPLES=OFF -D BUILD_DOCS=OFF -D BUILD_EXAMPLES=OFF -D WITH_QT=OFF -D WITH_OPENGL=OFF -D WITH_VTK=OFF -D BUILD_PERF_TESTS=OFF -D BUILD_TESTS=OFF -D WITH_CUDA=OFF -D BUILD_opencv_gpu=OFF -DENABLE_PRECOMPILED_HEADERS=OFF -D WITH_FFMPEG=OFF -D CMAKE_CXX_FLAGS='-Wno-error=address' -Wno-dev ..
-
+    make -j4
+    sudo make install
+    echo "/usr/local/lib" | sudo tee -a /etc/ld.so.conf.d/opencv.conf
+    sudo ldconfig
+    echo "PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/usr/local/lib/pkgconfig" | sudo tee -a /etc/bash.bashrc
+    echo "export PKG_CONFIG_PATH" | sudo tee -a /etc/bash.bashrc
+    source /etc/bash.bashrc
+    #install DLib
+    cd ../../DLib
+    mkdir build
+    cd build
+    cmake ..
+    make -j4
+    sudo make install
+    #install DBoW2
+    cd ../../DBoW2
+    mkdir build
+    cd build
+    cmake ../
+    make -j8
+    sudo make install
+    #install DLoopDetector
+    cd ../../DLoopDetector
+    mkdir build
+    cd build
+    cmake ../
+    make -j8
+    sudo make install
+    #install isam_v1_7
+    cd ../../isam_v1_7
+    mkdir build
+    cd build
+    cmake ..
+    make -j8
+    sudo make install
+    #build Kintinious
+    cd ../..
+    cd ..
+    mkdir build
+    cd build
+    ccmake ../src
+    # change CUDA_arch to 61 // check https://developer.nvidia.com/cuda-gpus for reference //
+    make -j8
 
 
     exit
