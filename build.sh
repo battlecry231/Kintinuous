@@ -31,7 +31,7 @@ elif [[ $version == *"18.10"* ]] ; then
         sudo apt update
         sudo apt install cuda
     fi
-    sudo apt install cmake-qt-gui git build-essential libusb-1.0-0-dev libudev-dev openjdk-11-jdk freeglut3-dev python-vtk6 libvtk6-java libglew-dev libsuitesparse-dev
+    sudo apt install cmake-qt-gui git build-essential libusb-1.0-0-dev libudev-dev openjdk-11-jdk freeglut3-dev python-vtk6 libvtk6-java libglew-dev libsuitesparse-dev libboost1.67-dev
     sudo apt install python-pip
     pip install numpy
     #Installing Pangolin  --- not tested ---
