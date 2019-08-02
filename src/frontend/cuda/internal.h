@@ -241,6 +241,15 @@ const int DIVISOR = 32767;     // SHRT_MAX;
 const float RGB_VIEW_ANGLE_WEIGHT = 0.75;
 
 #define VOL 512
+/*
+512  -> 5.8 mm
+768  -> 3.9 mm NOERR: Free Bytes: 1016659968
+800  -> 3.7 mm NOERR: Free Bytes: 2449145856 Trying to allocate: 2048000000 -> small performance issues (drop to 20fps sometimes)
+832  -> 3.6 mm ERROR: Free Bytes: 2344812544 Trying to allocate: 2303721472
+896  -> 3.3 mm ERROR: Free Bytes: 2118451200 Trying to allocate: 2877292544
+1024 -> 2.9 mm ERROR: Free Bytes: 1613955072 Trying to allocate: 4294967296
+
+*/
 
 enum { VOLUME_X = VOL, VOLUME_Y = VOL, VOLUME_Z = VOL};
 
