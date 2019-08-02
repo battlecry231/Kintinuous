@@ -240,7 +240,7 @@ const int DIVISOR = 32767;     // SHRT_MAX;
 // Sets point where normal angle reaches max weight
 const float RGB_VIEW_ANGLE_WEIGHT = 0.75;
 
-#define VOL 512
+#define VOL 800
 /*
 512  -> 5.8 mm
 768  -> 3.9 mm NOERR: Free Bytes: 1016659968
